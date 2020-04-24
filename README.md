@@ -23,7 +23,8 @@ This can take quite a while.
 ### Option 1: Julia REPL
 
 ```
-$ podman run -it --rm -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri:/dev/dri -v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so
+$ podman run -it --rm -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri:/dev/dri \
+-v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so
 ```
 
 If you want to `include(…)` a Julia script that displays a Makie.jl scene, call `AbstractPlotting.__init__()` after `using Makie`.
@@ -31,7 +32,8 @@ If you want to `include(…)` a Julia script that displays a Makie.jl scene, cal
 ### Option 2: Run a specific Julia script
 
 ```
-$ podman run -it --rm -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri:/dev/dri -v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so <script.jl>
+$ podman run -it --rm -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri:/dev/dri \
+-v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so <script.jl>
 ```
 
 #### Side note
@@ -74,7 +76,8 @@ display(scene)
 
 Start REPL and run `test.jl`:
 ```
-$ podman run -it --rm -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri:/dev/dri -v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so test.jl
+$ podman run -it --rm -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri:/dev/dri \
+-v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so test.jl
 
 julia> 1 + 2
 3
@@ -101,7 +104,8 @@ readline()
 
 Run `test.jl`:
 ```
-$ podman run -it --rm -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri:/dev/dri -v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so test.jl
+$ podman run -it --rm -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri:/dev/dri \
+-v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so test.jl
 ```
 
 ### Screenshot
