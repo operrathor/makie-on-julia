@@ -18,21 +18,13 @@ This can take quite a while.
 
 *For docker, replace `podman` by `docker`.*
 
-Julia REPL:
-```
-$ podman run -it --rm -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri:/dev/dri -v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so
-```
+### Option 1: Run a specific Julia script
 
-Specific Julia script:
 ```
 $ podman run -it --rm -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri:/dev/dri -v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so <script.jl>
 ```
 
-We mount `$PWD`, so we can access its files.
-
-If you want the container to be kept, remove `--rm` and give it a `--name <container name>`.
-
-## Side note
+#### Side note
 
 No matter if you run a Julia script with a Makie.jl scene via `julia <script.jl>` natively or in a container,
 you want the window to stay open after `display(scene)`.
@@ -46,6 +38,19 @@ readline()
 
 * `readline()` makes sure the script doesn't exit immediately
 * An additional listener keeps track of the window state. Once you close it, the program exits
+
+### Option 2: Julia REPL
+
+```
+$ podman run -it --rm -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri:/dev/dri -v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so
+```
+
+In your script, call `AbstractPlotting.__init__()` immediately after `using Makie`.
+
+### Notes
+
+* We mount `$PWD`, so we can access its files
+* If you want the container to be kept, remove `--rm` and give it a `--name <container name>`
 
 ## Example
 
