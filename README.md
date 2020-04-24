@@ -6,7 +6,7 @@ Julia OCI image with precompiled Makie.jl on top of it.
 
 ## Build image
 
-*For docker, replace `buildah bud` by `docker build`.*
+*For Docker, replace `buildah bud` by `sudo docker build`.*
 
 ```
 $ git clone https://github.com/operrathor/makie-on-julia.git
@@ -18,13 +18,13 @@ This can take quite a while.
 
 ## Run
 
-*For docker, replace `podman` by `docker`.*
+*For Docker, replace `podman` by `sudo docker`.*
 
 ### Option 1: Julia REPL
 
 ```
 $ podman run -it --rm -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri:/dev/dri \
--v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so
+    -v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so
 ```
 
 If you want to `include(…)` a Julia script that displays a Makie.jl scene, call `AbstractPlotting.__init__()` after `using Makie`.
@@ -33,7 +33,8 @@ If you want to `include(…)` a Julia script that displays a Makie.jl scene, cal
 
 ```
 $ podman run -it --rm -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri:/dev/dri \
--v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so <script.jl>
+    -v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so \
+    <script.jl>
 ```
 
 #### Side note
@@ -77,13 +78,15 @@ display(scene)
 Start REPL and run `test.jl`:
 ```
 $ podman run -it --rm -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri:/dev/dri \
--v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so test.jl
+    -v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so
 
 julia> 1 + 2
 3
 
 julia> include("test.jl")
 ```
+
+*For Docker, replace `podman` by `sudo docker`.*
 
 ### Option 2: Run a specific Julia script directly
 
@@ -105,8 +108,11 @@ readline()
 Run `test.jl`:
 ```
 $ podman run -it --rm -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri:/dev/dri \
--v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so test.jl
+    -v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so \
+    test.jl
 ```
+
+*For Docker, replace `podman` by `sudo docker`.*
 
 ### Screenshot
 
