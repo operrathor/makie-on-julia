@@ -2,11 +2,7 @@
 
 [Julia](https://julialang.org/) OCI image with precompiled [Makie.jl](http://makie.juliaplots.org/) on top of it.
 
-*Didn't have the chance to test it with Docker's tools yet, only with buildah/podman.*
-
 ## Build image
-
-*For Docker, replace `buildah bud` by `sudo docker build`.*
 
 ```
 $ git clone https://github.com/operrathor/makie-on-julia.git
@@ -17,8 +13,6 @@ $ buildah bud -t makie-on-julia:1.4.1 .
 This can take quite a while.
 
 ## Run
-
-*For Docker, replace `podman` by `sudo docker`.*
 
 ### Option 1: Julia REPL
 
@@ -59,9 +53,9 @@ readline()
 
 ## Examples
 
-### Option 1: Julia REPL
+### Option 1: `include(…)` in Julia REPL
 
-Our `test.jl`:
+Sample script `test.jl`:
 ```
 using Makie
 
@@ -86,11 +80,9 @@ julia> 1 + 2
 julia> include("test.jl")
 ```
 
-*For Docker, replace `podman` by `sudo docker`.*
-
 ### Option 2: Run a specific Julia script directly
 
-Our `test.jl`:
+Sample script `test.jl`:
 ```
 using Makie
 import Observables
@@ -105,14 +97,12 @@ display(scene)
 readline()
 ```
 
-Run `test.jl`:
+Run it:
 ```
 $ podman run -it --rm -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri:/dev/dri \
     -v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so \
     test.jl
 ```
-
-*For Docker, replace `podman` by `sudo docker`.*
 
 ### Screenshot
 
