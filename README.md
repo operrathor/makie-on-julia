@@ -1,6 +1,6 @@
 # Makie.jl on Julia OCI Image
 
-Julia OCI image with precompiled Makie.jl on top of it.
+[Julia](https://julialang.org/) OCI image with precompiled [Makie.jl](http://makie.juliaplots.org/) on top of it.
 
 *Didn't have the chance to test it with Docker's tools yet, only with buildah/podman.*
 
@@ -117,8 +117,3 @@ $ podman run -it --rm -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri:
 ### Screenshot
 
 ![Makie.jl scene with terminal in background](screenshot.png)
-
-## Links
-
-* The Julia Language: https://julialang.org/
-* Makie.jl: http://makie.juliaplots.org/
