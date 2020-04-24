@@ -2,6 +2,10 @@
 
 [Julia](https://julialang.org/) OCI image with precompiled [Makie.jl](http://makie.juliaplots.org/) on top of it.
 
+## <a name="screenshot"></a>Screenshot
+
+![Makie.jl scene with terminal in background](screenshot.png)
+
 ## Build image
 
 ```
@@ -53,6 +57,8 @@ readline()
 
 ## Examples
 
+_Both options produce the same output, see [screenshot at the top](#screenshot)_.
+
 ### Option 1: `include(…)` in Julia REPL
 
 Sample script `test.jl`:
@@ -103,7 +109,3 @@ $ podman run -it --rm -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri:
     -v "$PWD":/mnt -w /mnt makie-on-julia:1.4.1 julia -J /MakieSys.so \
     test.jl
 ```
-
-### Screenshot
-
-![Makie.jl scene with terminal in background](screenshot.png)
