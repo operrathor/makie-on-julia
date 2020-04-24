@@ -42,13 +42,11 @@ you want the window to stay open after `display(scene)`.
 
 I found a nice way on how to achieve that:
 ```julia
-Observables.on(o -> if !o[] exit() end, scene.events.window_open)
+window_closed = Condition()
+Observables.on(window_open -> if !window_open[] notify(window_closed) end, scene.events.window_open)
 display(scene)
-readline()
+wait(window_closed)
 ```
-
-* `readline()` makes sure the script doesn't exit immediately
-* An additional listener keeps track of the window state. Once you close it, the program exits
 
 ### Notes
 
@@ -98,9 +96,10 @@ y = rand(10)
 colors = rand(10)
 scene = scatter(x, y, color = colors)
 
-Observables.on(o -> if !o[] exit() end, scene.events.window_open)
+window_closed = Condition()
+Observables.on(window_open -> if !window_open[] notify(window_closed) end, scene.events.window_open)
 display(scene)
-readline()
+wait(window_closed)
 ```
 
 Run it:
